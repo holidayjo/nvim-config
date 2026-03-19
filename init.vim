@@ -1,19 +1,13 @@
+
 " ==============================================================================
 " CORE SYSTEM & UI
 " ==============================================================================
 syntax on                  " Enable syntax highlighting
-set notermguicolors        " Disable true color to use terminal's native palette
+set termguicolors          " Enable true color for exact VS Code hex colors
 set number                 " Show absolute line number on the current line
 set cursorline             " Highlight the entire line your cursor is currently on
 set signcolumn=yes         " Keep a margin on the left for error markers
 set clipboard=unnamedplus  " Link Neovim's yank/paste to the system clipboard
-
-" --- THE UBUNTU PURPLE FIX ---
-" This forces Neovim's background to be transparent so your terminal color shows
-highlight Normal guibg=NONE ctermbg=NONE
-highlight NonText guibg=NONE ctermbg=NONE
-highlight LineNr guibg=NONE ctermbg=NONE
-highlight EndOfBuffer guibg=NONE ctermbg=NONE
 
 " ==============================================================================
 " SEARCHING
@@ -36,8 +30,9 @@ set expandtab              " Convert tabs to spaces
 " ==============================================================================
 " INVISIBLE CHARACTERS
 " ==============================================================================
-set list
-set listchars=tab:▸\ ,trail:•,extends:❯,precedes:❮
+" Disabled to keep the screen completely clean of dots and arrows
+" set list
+" set listchars=tab:▸\ ,extends:❯,precedes:❮
 
 " ==============================================================================
 " PLUGINS
@@ -46,8 +41,27 @@ call plug#begin()
 
 " The modern, smart indent line plugin
 Plug 'lukas-reineke/indent-blankline.nvim'
+" VS Code Dark Theme
+Plug 'tomasiser/vim-code-dark'
 
 call plug#end()
+
+" ==============================================================================
+" COLOR SCHEME & THEME TWEAKS
+" ==============================================================================
+autocmd VimEnter * colorscheme codedark
+
+
+" --- THE UBUNTU PURPLE FIX ---
+" Must be placed AFTER the colorscheme to override its default black background
+highlight Normal guibg=NONE ctermbg=NONE
+highlight NonText guibg=NONE ctermbg=NONE
+highlight LineNr guibg=NONE ctermbg=NONE
+" highlight EndOfBuffer guibg=NONE ctermbg=NONE
+
+" Add this line to force standard text to be pure white
+" highlight Normal guifg=#FFFFFF ctermfg=White
+
 
 " ==============================================================================
 " PLUGIN CONFIGURATION
@@ -65,3 +79,5 @@ require("ibl").setup {
     },
 }
 EOF
+
+
